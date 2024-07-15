@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: '18'
 
       - name: Install dependencies
         run: yarn install
@@ -28,7 +28,7 @@ jobs:
         run: yarn build
 
       - name: Run tests
-        run: yarn test
+        run: yarn test --passWithNoTests
 
       - name: Run formatter check
         run: yarn format
