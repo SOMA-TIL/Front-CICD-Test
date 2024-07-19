@@ -40,6 +40,13 @@ jobs:
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/my-react-app:latest
-            docker stop my-react-app || true
-            docker rm my-react-app || true
+            if [ $(docker ps -q -f name=my-react-app) ]; then
+              docker stop my-react-app
+            fi
+            if [ $(docker ps -a -q -f name=my-react-app) ]; then
+              docker rm my-react-app
+            fi
+            if [ $(lsof -t -i:80) ]; then
+              kill -9 $(lsof -t -i:80)
+            fi
             docker run -d --name my-react-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-react-app:latest
