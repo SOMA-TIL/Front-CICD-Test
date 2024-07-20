@@ -44,7 +44,6 @@ jobs:
           username: ${{ secrets.AWS_EC2_USER }}
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
           script: |
-            cd /path/to/your/docker-compose
             docker-compose pull frontend
             docker-compose down
             docker-compose up -d
