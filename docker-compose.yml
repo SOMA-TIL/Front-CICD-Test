@@ -1,7 +1,10 @@
 version: '3.8'
 
 services:
-  frontend:
-    image: myjjue/my-react-app:latest
-    ports:
-      - '80:80'
+  til-front:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    volumes:
+      - .:/app
+      - /app/node_modules
